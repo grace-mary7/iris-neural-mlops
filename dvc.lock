@@ -1,0 +1,74 @@
+schema: '2.0'
+stages:
+  validate:
+    cmd: python validate_data.py
+    deps:
+    - path: iris.csv
+      hash: md5
+      md5: 42615765a885ddf54427f12c34a0a070
+      size: 4551
+    - path: validate_data.py
+      hash: md5
+      md5: 179e874c569bdad26b5b55bdd806e371
+      size: 1812
+    outs:
+    - path: validation_report.txt
+      hash: md5
+      md5: 02a634f85b07355e471c3973ed6fcba4
+      size: 111
+  train:
+    cmd: python train_model.py
+    deps:
+    - path: iris.csv
+      hash: md5
+      md5: 42615765a885ddf54427f12c34a0a070
+      size: 4551
+    - path: train_model.py
+      hash: md5
+      md5: 4d777aaf5f536aae9ab65b03de589123
+      size: 2738
+    outs:
+    - path: artifacts/iris_model.keras
+      hash: md5
+      md5: 5a72dbe2b0e9f580b4fcb4f69163ab85
+      size: 28340
+    - path: artifacts/label_encoder.pkl
+      hash: md5
+      md5: de01632e3af24ed75eb8f7e202b24158
+      size: 522
+    - path: artifacts/metadata.json
+      hash: md5
+      md5: bd7565648604c7bc7bd44a0bcc5f507b
+      size: 261
+    - path: artifacts/scaler.pkl
+      hash: md5
+      md5: 9632814cff471bf898288842c520290a
+      size: 711
+    - path: artifacts/test_data.npz
+      hash: md5
+      md5: 52a00b4a58e6fc5cacfce37d21fa2b15
+      size: 1710
+  evaluate:
+    cmd: python evaluate_model.py
+    deps:
+    - path: artifacts/iris_model.keras
+      hash: md5
+      md5: 5a72dbe2b0e9f580b4fcb4f69163ab85
+      size: 28340
+    - path: artifacts/label_encoder.pkl
+      hash: md5
+      md5: de01632e3af24ed75eb8f7e202b24158
+      size: 522
+    - path: artifacts/test_data.npz
+      hash: md5
+      md5: 52a00b4a58e6fc5cacfce37d21fa2b15
+      size: 1710
+    - path: evaluate_model.py
+      hash: md5
+      md5: 4e11fcb4166c30a04a2644af4b40b851
+      size: 1649
+    outs:
+    - path: artifacts/metrics.json
+      hash: md5
+      md5: 4d62140ecd461077b5e166cfb2732875
+      size: 114

@@ -12,52 +12,61 @@ EXPECTED_COLUMNS = [
     "species",
 ]
 
-EXPECTED_SPECIES = {"Iris-setosa", "Iris-versicolor", "Iris-virginica"}
+EXPECTED_SPECIES = {
+    "Iris-setosa",
+    "Iris-versicolor",
+    "Iris-virginica",
+}
 
 
 def validate_data():
     if not DATA_PATH.exists():
         raise FileNotFoundError(f"Dataset not found: {DATA_PATH}")
 
+    # The CSV has no header row.
     df = pd.read_csv(DATA_PATH, header=None)
     df.columns = EXPECTED_COLUMNS
 
-    # Check columns
-    if list(df.columns) != EXPECTED_COLUMNS:
-        raise ValueError(
-            f"Incorrect columns. Found: {list(df.columns)}"
-        )
+    if df.empty:
+        raise ValueError("Dataset is empty.")
 
-    # Check missing values
+    # Check missing values.
     if df.isnull().values.any():
         raise ValueError("Dataset contains missing values.")
 
-    # Check numeric measurements
+    # Check numeric measurements.
     features = EXPECTED_COLUMNS[:4]
+
     for column in features:
         df[column] = pd.to_numeric(df[column], errors="coerce")
 
     if df[features].isnull().values.any():
         raise ValueError("Some flower measurements are not numeric.")
 
-    if not df[features].apply(lambda col: col.map(lambda x: x > 0)).all().all():
+    if not (df[features] > 0).all().all():
         raise ValueError("Flower measurements must be greater than zero.")
 
-    # Check species names
+    # Check species names.
     found_species = set(df["species"].unique())
-    if found_species != EXPECTED_SPECIES:
-        raise ValueError(
-            f"Unexpected species names: {found_species}"
-        )
 
-    # Check dataset size
+    if found_species != EXPECTED_SPECIES:
+        raise ValueError(f"Unexpected species names: {found_species}")
+
     if len(df) < 30:
         raise ValueError("Dataset has too few rows.")
 
-    print("DATA VALIDATION PASSED")
-    print(f"Rows: {len(df)}")
-    print(f"Features: {len(features)}")
-    print(f"Species: {sorted(found_species)}")
+    # Create the validation report.
+    report = (
+        "DATA VALIDATION PASSED\n"
+        f"Rows: {len(df)}\n"
+        f"Features: {len(features)}\n"
+        f"Species: {sorted(found_species)}\n"
+    )
+
+    print(report)
+
+    with open("validation_report.txt", "w", encoding="utf-8") as file:
+        file.write(report)
 
 
 if __name__ == "__main__":

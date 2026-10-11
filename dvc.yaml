@@ -1,0 +1,41 @@
+# stages:
+#   validate:
+#     cmd: python validate_data.py
+#     deps:
+#     - iris.csv
+#     - validate_data.py
+#     outs:
+#     - validation_report.txt
+
+
+
+stages:
+  validate:
+    cmd: python validate_data.py
+    deps:
+      - validate_data.py
+      - iris.csv
+    outs:
+      - validation_report.txt
+
+  train:
+    cmd: python train_model.py
+    deps:
+      - train_model.py
+      - iris.csv
+    outs:
+      - artifacts/iris_model.keras
+      - artifacts/scaler.pkl
+      - artifacts/label_encoder.pkl
+      - artifacts/test_data.npz
+      - artifacts/metadata.json
+
+  evaluate:
+    cmd: python evaluate_model.py
+    deps:
+      - evaluate_model.py
+      - artifacts/iris_model.keras
+      - artifacts/label_encoder.pkl
+      - artifacts/test_data.npz
+    outs:
+      - artifacts/metrics.json

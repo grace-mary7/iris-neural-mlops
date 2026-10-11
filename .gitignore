@@ -5,3 +5,4 @@ __pycache__/
 .env
 .dvc/cache/
 /iris.csv
+/validation_report.txt
