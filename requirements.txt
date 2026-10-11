@@ -1,7 +1,8 @@
-
 pandas
 numpy
 scikit-learn
 tensorflow
 dvc
 joblib
+fastapi
+uvicorn[standard]
