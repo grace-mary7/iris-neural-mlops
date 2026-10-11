@@ -1,4 +1,3 @@
-
 name: Iris MLOps Pipeline
 
 on:
@@ -12,6 +11,7 @@ on:
       - "evaluate_model.py"
       - "dvc.yaml"
       - "requirements.txt"
+      - ".dvc/config"
       - ".github/workflows/mlops.yml"
   workflow_dispatch:
 
@@ -34,6 +34,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Configure DagsHub authentication
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+        run: |
+          dvc remote modify dagshub --local auth basic
+          dvc remote modify dagshub --local user grace-mary7
+          dvc remote modify dagshub --local password "$DAGSHUB_TOKEN"
+
+      - name: Pull DVC data
+        run: dvc pull
 
       - name: Reproduce MLOps pipeline
         run: dvc repro
