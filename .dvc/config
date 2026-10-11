@@ -1,1 +1,4 @@
-
+[core]
+    remote = dagshub
+['remote "dagshub"']
+    url = https://dagshub.com/grace-mary7/iris-neural-mlops.dvc
