@@ -8,3 +8,4 @@ fastapi
 uvicorn[standard]
 prometheus-fastapi-instrumentator
 evidently
+mlflow
