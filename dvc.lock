@@ -9,15 +9,15 @@ stages:
       size: 4551
     - path: validate_data.py
       hash: md5
-      md5: 179e874c569bdad26b5b55bdd806e371
-      size: 1812
+      md5: 9f9fe1b316407800399561cb09c6f777
+      size: 1848
     outs:
     - path: validation_report.txt
       hash: md5
       md5: 02a634f85b07355e471c3973ed6fcba4
       size: 111
   train:
-    cmd: python train_model.py
+    cmd: .\venv312\Scripts\python.exe train_model.py
     deps:
     - path: iris.csv
       hash: md5
@@ -25,16 +25,16 @@ stages:
       size: 4551
     - path: train_model.py
       hash: md5
-      md5: 4d777aaf5f536aae9ab65b03de589123
-      size: 2738
+      md5: 4d189e383414b511ca4136d7f6059c23
+      size: 7610
     outs:
     - path: artifacts/iris_model.keras
       hash: md5
-      md5: 5a72dbe2b0e9f580b4fcb4f69163ab85
-      size: 28340
+      md5: e2bb30dbdef0f9a2999d8243e1ca2f4b
+      size: 28569
     - path: artifacts/label_encoder.pkl
       hash: md5
-      md5: de01632e3af24ed75eb8f7e202b24158
+      md5: 5b2412df88c0cf397db49a46d9713529
       size: 522
     - path: artifacts/metadata.json
       hash: md5
@@ -42,31 +42,31 @@ stages:
       size: 261
     - path: artifacts/scaler.pkl
       hash: md5
-      md5: 9632814cff471bf898288842c520290a
-      size: 711
+      md5: 03ebb5c2bf7df23e26b41af0d90f99d3
+      size: 679
     - path: artifacts/test_data.npz
       hash: md5
-      md5: 52a00b4a58e6fc5cacfce37d21fa2b15
+      md5: f2c80476ff7152fec28f395ea1fae73f
       size: 1710
   evaluate:
-    cmd: python evaluate_model.py
+    cmd: .\venv312\Scripts\python.exe evaluate_model.py
     deps:
     - path: artifacts/iris_model.keras
       hash: md5
-      md5: 5a72dbe2b0e9f580b4fcb4f69163ab85
-      size: 28340
+      md5: e2bb30dbdef0f9a2999d8243e1ca2f4b
+      size: 28569
     - path: artifacts/label_encoder.pkl
       hash: md5
-      md5: de01632e3af24ed75eb8f7e202b24158
+      md5: 5b2412df88c0cf397db49a46d9713529
       size: 522
     - path: artifacts/test_data.npz
       hash: md5
-      md5: 52a00b4a58e6fc5cacfce37d21fa2b15
+      md5: f2c80476ff7152fec28f395ea1fae73f
       size: 1710
     - path: evaluate_model.py
       hash: md5
-      md5: 4e11fcb4166c30a04a2644af4b40b851
-      size: 1649
+      md5: df5df205e76e2218943dab97cc16d55b
+      size: 4371
     outs:
     - path: artifacts/metrics.json
       hash: md5

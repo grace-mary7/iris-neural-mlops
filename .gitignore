@@ -1,8 +1,20 @@
 
+# venv/
+# __pycache__/
+# *.pyc
+# .env
+# .dvc/cache/
+# /iris.csv
+# /validation_report.txt
+
+
 venv/
+venv312/
 __pycache__/
 *.pyc
 .env
 .dvc/cache/
-/iris.csv
-/validation_report.txt
+mlflow.db
+mlruns/
+iris.csv
+validation_report.txt
