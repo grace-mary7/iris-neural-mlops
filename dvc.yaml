@@ -19,9 +19,9 @@ stages:
       - validation_report.txt
 
   train:
-    #cmd: python train_model.py
+    cmd: python train_model.py
     #cmd: venv312/Scripts/python.exe train_model.py
-    cmd: .\venv312\Scripts\python.exe train_model.py
+    #cmd: .\venv312\Scripts\python.exe train_model.py
     deps:
       - train_model.py
       - iris.csv
@@ -33,8 +33,8 @@ stages:
       - artifacts/metadata.json
 
   evaluate:
-    #cmd: python evaluate_model.py
-    cmd: .\venv312\Scripts\python.exe evaluate_model.py
+    cmd: python evaluate_model.py
+    #cmd: .\venv312\Scripts\python.exe evaluate_model.py
     deps:
       - evaluate_model.py
       - artifacts/iris_model.keras

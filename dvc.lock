@@ -17,7 +17,7 @@ stages:
       md5: 02a634f85b07355e471c3973ed6fcba4
       size: 111
   train:
-    cmd: .\venv312\Scripts\python.exe train_model.py
+    cmd: python train_model.py
     deps:
     - path: iris.csv
       hash: md5
@@ -30,7 +30,7 @@ stages:
     outs:
     - path: artifacts/iris_model.keras
       hash: md5
-      md5: e2bb30dbdef0f9a2999d8243e1ca2f4b
+      md5: a5105922f06be3eb8a0a110ca4603e2c
       size: 28569
     - path: artifacts/label_encoder.pkl
       hash: md5
@@ -49,11 +49,11 @@ stages:
       md5: f2c80476ff7152fec28f395ea1fae73f
       size: 1710
   evaluate:
-    cmd: .\venv312\Scripts\python.exe evaluate_model.py
+    cmd: python evaluate_model.py
     deps:
     - path: artifacts/iris_model.keras
       hash: md5
-      md5: e2bb30dbdef0f9a2999d8243e1ca2f4b
+      md5: a5105922f06be3eb8a0a110ca4603e2c
       size: 28569
     - path: artifacts/label_encoder.pkl
       hash: md5
